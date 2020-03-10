@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Listar Alunos</title>
-</head>
-<body>
-    <h1>Cadastro de Alunos</h1>
+<%-include('cabecalho.ejs')%>
+    
     <form method="POST">
         <input type="text" name="Pesquisa" placeholder="Pesquisar">
         <input type="submit">
@@ -27,11 +19,19 @@
             <th><%=aluno.nome%></th>
             <th><%=aluno.endereco%></th>
             <th><%=aluno.cell%></th>
-            <th>Edita</th>
-            <th>Deleta</th>
+            <th>
+                <a href="/edit/<%=aluno._id%>">
+                    Edita
+                </a>
+            </th>
+            <th>
+                <a href="/del/<%=aluno._id%>">
+                    Deleta
+                </a>
+            </th>
+            
         </tr>
-    <%}) %>
+    <% }) %>
     </table>
     <h2><%=msg%></h2>
-</body>
-</html>
+    <%-include('rodape.ejs')%>

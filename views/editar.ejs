@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Editando Alunos</h1>
-    <form method="POST">
-        ID: <input type="text" name="ID" readonly></br>
-        Nome: <input type="text" name="nome" placeholder="Nome" value="<%req.body.nome%>"></br>
-        Endereço: <input type="text" name="endereco" placeholder="Endereço" value="<%req.body.endereco%>"></br>
-        Cell: <input type="text" name="cell" placeholder="Cell" value="<%req.body.cell%>"></br>
+<%-include('cabecalho.ejs')%>
+    <form method="POST">             
+        ID: <input type="text" name="ID" readonly value="<%=aluno._id%>"></br>
+        Nome: <input type="text" name="nome" placeholder="Nome" value="<%aluno.nome%>"></br>
+        Endereço: <input type="text" name="endereco" placeholder="Endereço" value="<%aluno.endereco%>"></br>
+        Cell: <input type="text" name="cell" placeholder="Cell" value="<%aluno.cell%>"></br>
         <input type="submit">
     </form>
+    <script>
+
+    </script>
     
-</body>
-</html>
+    <%-include('rodape.ejs')%>
