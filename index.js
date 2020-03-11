@@ -2,17 +2,26 @@
 const express = require('express')
 var app = express()
 var bodyparser = require('body-parser')
-var Aluno = require("./model/aluno")
+var Aluno = require('./model/aluno')
+var flash = require('req-flash')
+var cookieParser = require('cookie-parser')
+var session = require('express-session')
 
+app.use(cookieParser())
+app.use(session({
+    secret: '123',
+    resave: true,
+    saveUninitialized: true
+}))
+app.use(flash())
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: false }))
-
 app.set('view engine','ejs')
 
 ///// res = resposta de dados para função e req = solicitação de dados para função/////
 app.get('/',function(req,res){
     Aluno.find({}).exec(function(err,docs){
-        res.render('listar.ejs', { listaAlunos: docs, msg:""})
+        res.render('listar.ejs', { listaAlunos: docs, msg: req.flash('msg')})
     })
 
     
@@ -54,7 +63,8 @@ app.get('/edit/:id',function(req,res){
     
 })
 app.post('/edit/:id',function(req,res){
-    Alunos.findByIdAndUpdate(req.body.id,
+    
+    Aluno.findByIdAndUpdate(req.body.id,
         {
             nome:req.body.nome,
             endereco:req.body.endereco,
@@ -62,17 +72,24 @@ app.post('/edit/:id',function(req,res){
 
         },
         function(err,docs){
-            res.redirect('/')
+            if(err){
+                req.flash('msg', 'Problema ao alterar')
+                res.redirect('/')
+            }else{
+                req.flash('msg', 'Alterado com sucesso!')
+                res.redirect('/')
+        }
         }
     )
 })
 
 app.get('/del/:id',function(req,res){
-    Aluno.findByIdAndDelete(req.params.id,function(err,docs){
-        if(err){
-            res.redirect('')
+    Aluno.findByIdAndDelete(req.params.id,function(err, docs){
+        if(err){ req.flash('msg','Problema ao excluir')
+            res.redirect('/')
         }else{
-            res.redirect('')
+            req.flash('msg', 'Excluido com sucesso!')
+            res.redirect('/')
         }
     })
     
