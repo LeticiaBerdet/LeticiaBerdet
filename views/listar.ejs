@@ -15,20 +15,20 @@
         </tr>
         <% listaAlunos.forEach(function(aluno){%>
         <tr>
-            <th><%=aluno._id%></th>
-            <th><%=aluno.nome%></th>
-            <th><%=aluno.endereco%></th>
-            <th><%=aluno.cell%></th>
-            <th>
+            <td><%=aluno._id%></td>
+            <td><%=aluno.nome%></td>
+            <td><%=aluno.endereco%></td>
+            <td><%=aluno.cell%></td>
+            <td style="text-align: center;">
                 <a href="/edit/<%=aluno._id%>">
-                    Edita
+                    <img src="editar.png" style="width: 20px" alt="icone de editar"/>
                 </a>
-            </th>
-            <th>
+            </td>
+            <td style="text-align: center;">
                 <a href="/del/<%=aluno._id%>">
-                    Deleta
+                    <img src="lixo.png" style="width: 30px", alt="icone de deletar"/>
                 </a>
-            </th>
+            </td>
             
         </tr>
     <% }) %>
